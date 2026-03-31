@@ -47,8 +47,8 @@ const HeroSection = () => {
               NICEIC Approved Electrical Contractors
             </motion.div>
             <motion.h1 variants={fadeUp} custom={1} className="text-3xl md:text-6xl font-heading font-800 leading-[1.1] mb-4 md:mb-6">
-              Need an Electrician
-              <span className="text-primary-foreground/90"> for Your Home or Business?</span>
+              Award Winning
+              <span className="text-primary-foreground/90"> Electricians in Hertfordshire?</span>
             </motion.h1>
             <motion.p variants={fadeUp} custom={2} className="text-base md:text-xl text-primary-foreground/80 mb-6 md:mb-8 max-w-lg leading-relaxed">
               Whether it's a full rewire, EV charger, office fit-out or emergency repair — our qualified team

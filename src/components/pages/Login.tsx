@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
-import { LogIn, Eye, EyeOff } from "lucide-react";
+import { LogIn, Eye, EyeOff, Home } from "lucide-react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -34,7 +34,11 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-muted px-4">
+    <div className="min-h-screen flex items-center justify-center bg-muted px-4 relative">
+      <Link href="/" className="absolute top-4 left-4 flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors">
+        <Home className="h-4 w-4" />
+        <span>Home</span>
+      </Link>
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-2">
@@ -62,9 +66,8 @@ const Login = () => {
               <LogIn className="h-4 w-4 mr-2" />
               {loading ? "Signing in..." : "Sign In"}
             </Button>
-            <div className="flex justify-between text-sm">
+            <div className="text-sm">
               <Link href="/forgot-password" className="text-primary hover:underline">Forgot password?</Link>
-              <Link href="/signup" className="text-primary hover:underline">Create account</Link>
             </div>
           </form>
         </CardContent>
