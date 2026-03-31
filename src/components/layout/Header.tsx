@@ -36,7 +36,7 @@ const Header = () => {
       <div className="container flex items-center justify-between py-3 md:py-4">
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="/placeholder.svg"
+            src="/logo.png"
             alt="Greenhills Electric"
             width={160}
             height={40}

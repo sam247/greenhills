@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <Image
-              src="/placeholder.svg"
+              src="/logo.png"
               alt="Greenhills Electric"
               width={160}
               height={40}
