@@ -38,9 +38,9 @@ const Header = () => {
           <Image
             src="/logo.png"
             alt="Greenhills Electric"
-            width={160}
-            height={40}
-            className="h-7 md:h-10 w-auto"
+            width={128}
+            height={32}
+            className="h-[22px] md:h-8 w-auto"
             priority
           />
         </Link>

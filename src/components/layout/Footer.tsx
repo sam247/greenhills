@@ -12,9 +12,9 @@ const Footer = () => {
             <Image
               src="/logo.png"
               alt="Greenhills Electric"
-              width={160}
-              height={40}
-              className="h-10 w-auto mb-3 md:mb-4 brightness-0 invert"
+              width={128}
+              height={32}
+              className="h-8 w-auto mb-3 md:mb-4 brightness-0 invert"
             />
             <p className="text-primary-foreground/70 text-xs md:text-sm leading-relaxed">
               Professional electrical contractors with over 60 years of combined experience.

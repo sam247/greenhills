@@ -222,7 +222,7 @@ const AdminDashboard = () => {
         <div className="container flex items-center justify-between py-3">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <Image src="/logo.png" alt="Greenhills" width={120} height={32} className="h-8 w-auto" style={{ filter: "brightness(0)" }} />
+              <Image src="/logo.png" alt="Greenhills" width={96} height={26} className="h-[26px] w-auto" style={{ filter: "brightness(0)" }} />
               <span className="text-xs font-semibold tracking-[0.15em] text-muted-foreground">ADMIN</span>
             </div>
           </div>
