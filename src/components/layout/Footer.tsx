@@ -20,6 +20,11 @@ const Footer = () => {
               Professional electrical contractors with over 60 years of combined experience.
               NICEIC approved and Part P registered.
             </p>
+            <div className="flex items-center gap-3 mt-4">
+              <Image src="/trust1.png" alt="NICEIC Approved" width={48} height={32} className="h-8 w-auto object-contain" />
+              <Image src="/trust2.png" alt="Part P Registered" width={48} height={32} className="h-8 w-auto object-contain" />
+              <Image src="/trust3.png" alt="Trustmark" width={48} height={32} className="h-8 w-auto object-contain" />
+            </div>
           </div>
 
           {/* Services */}

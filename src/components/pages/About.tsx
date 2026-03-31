@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ShieldCheck, Users, Award, Clock } from "lucide-react";
 import Layout from "@/components/layout/Layout";
+import CTASection from "@/components/home/CTASection";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -91,6 +92,8 @@ const About = () => (
         </div>
       </div>
     </section>
+
+    <CTASection />
   </Layout>
 );
 

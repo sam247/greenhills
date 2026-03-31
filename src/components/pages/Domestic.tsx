@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Home, ZapOff, Plug, CarFront, Cpu, FileCheck, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Layout from "@/components/layout/Layout";
+import CTASection from "@/components/home/CTASection";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -40,7 +40,7 @@ const Domestic = () => (
 
     <section className="py-20 md:py-28">
       <div className="container">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((s, i) => (
             <motion.div key={s.title} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={fadeUp} custom={i}>
               <Card className="h-full border-2 border-border hover:border-primary/20 transition-all duration-300">
@@ -61,15 +61,7 @@ const Domestic = () => (
       </div>
     </section>
 
-    <section className="py-20 bg-secondary text-center">
-      <div className="container">
-        <h2 className="text-3xl font-heading font-800 mb-4">Need a Home Electrician?</h2>
-        <p className="text-muted-foreground mb-8 max-w-xl mx-auto">Contact us for friendly, professional advice and a free quote.</p>
-        <Button asChild size="lg" className="font-heading font-700">
-          <Link href="/contact">Get a Free Quote <ArrowRight className="ml-2 h-5 w-5" /></Link>
-        </Button>
-      </div>
-    </section>
+    <CTASection />
   </Layout>
 );
 
