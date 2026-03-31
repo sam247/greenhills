@@ -102,12 +102,13 @@ const ProjectDetail = ({ project, customers, open, onOpenChange, onRefresh }: Pr
       });
       setEditing(false);
       setNewMessage("");
+      if (!supabase) return;
       supabase.from("messages").select("*").eq("project_id", project.id).order("created_at", { ascending: true })
         .then(({ data }) => setMessages(data || []));
       supabase.from("invoices").select("id, invoice_number, amount, status, due_date, created_at").eq("project_id", project.id)
         .then(({ data }) => setInvoices(data || []));
     }
-  }, [project]);
+  }, [project, supabase]);
 
   useEffect(() => {
     timelineEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -135,6 +136,7 @@ const ProjectDetail = ({ project, customers, open, onOpenChange, onRefresh }: Pr
   ].sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
 
   const handleSave = async () => {
+    if (!supabase) return;
     const { error } = await supabase.from("projects").update({
       description: form.description || null,
       address: form.address || null,
@@ -154,7 +156,7 @@ const ProjectDetail = ({ project, customers, open, onOpenChange, onRefresh }: Pr
   };
 
   const handleSendMessage = async () => {
-    if (!newMessage.trim() || !user) return;
+    if (!newMessage.trim() || !user || !supabase) return;
     setSending(true);
     const { error } = await supabase.from("messages").insert({
       content: newMessage.trim(),

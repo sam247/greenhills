@@ -61,7 +61,14 @@ const CustomerDashboard = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!user) return;
+    if (!user) {
+      setLoading(false);
+      return;
+    }
+    if (!supabase) {
+      setLoading(false);
+      return;
+    }
     const fetchData = async () => {
       const [projRes, invRes] = await Promise.all([
         supabase.from("projects").select("*").eq("customer_id", user.id).order("created_at", { ascending: false }),
@@ -72,10 +79,10 @@ const CustomerDashboard = () => {
       setLoading(false);
     };
     fetchData();
-  }, [user]);
+  }, [user, supabase]);
 
   useEffect(() => {
-    if (!selectedProject) return;
+    if (!selectedProject || !supabase) return;
     const fetchMessages = async () => {
       const { data } = await supabase
         .from("messages")
@@ -95,10 +102,10 @@ const CustomerDashboard = () => {
       .subscribe();
 
     return () => { supabase.removeChannel(channel); };
-  }, [selectedProject]);
+  }, [selectedProject, supabase]);
 
   const sendMessage = async () => {
-    if (!newMessage.trim() || !selectedProject || !user) return;
+    if (!newMessage.trim() || !selectedProject || !user || !supabase) return;
     const { error } = await supabase.from("messages").insert({
       project_id: selectedProject.id,
       sender_id: user.id,
@@ -110,7 +117,7 @@ const CustomerDashboard = () => {
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file || !selectedProject || !user) return;
+    if (!file || !selectedProject || !user || !supabase) return;
     const filePath = `${selectedProject.id}/${Date.now()}_${file.name}`;
     const { error: uploadError } = await supabase.storage.from("project-files").upload(filePath, file);
     if (uploadError) { toast.error(uploadError.message); return; }

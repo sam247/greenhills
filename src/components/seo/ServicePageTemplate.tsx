@@ -37,6 +37,7 @@ const RecentWorkSection = ({ slug, serviceName }: { slug: string; serviceName: s
   const [images, setImages] = useState<{ url: string; title: string | null; location: string | null }[]>([]);
 
   useEffect(() => {
+    if (!supabase) return;
     supabase
       .from("job_uploads")
       .select("title, location, image_urls")
@@ -51,7 +52,7 @@ const RecentWorkSection = ({ slug, serviceName }: { slug: string; serviceName: s
           setImages(imgs);
         }
       });
-  }, [slug]);
+  }, [slug, supabase]);
 
   if (images.length === 0) return null;
 

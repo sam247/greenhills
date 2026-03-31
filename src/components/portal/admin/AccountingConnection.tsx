@@ -33,6 +33,10 @@ const AccountingConnection = () => {
   const [hovered, setHovered] = useState(false);
 
   const fetchConnection = async () => {
+    if (!supabase) {
+      setLoading(false);
+      return;
+    }
     const { data } = await supabase
       .from("accounting_connections")
       .select("id, provider, status, last_synced_at, connected_at")
@@ -44,9 +48,10 @@ const AccountingConnection = () => {
 
   useEffect(() => {
     fetchConnection();
-  }, []);
+  }, [supabase]);
 
   const handleConnect = async () => {
+    if (!supabase) return;
     setConnecting(true);
     const { error } = await supabase.from("accounting_connections").insert({
       provider: selectedProvider,
@@ -62,7 +67,7 @@ const AccountingConnection = () => {
   };
 
   const handleDisconnect = async () => {
-    if (!connection) return;
+    if (!connection || !supabase) return;
     const { error } = await supabase
       .from("accounting_connections")
       .delete()
@@ -76,7 +81,7 @@ const AccountingConnection = () => {
   };
 
   const handleSync = async () => {
-    if (!connection) return;
+    if (!connection || !supabase) return;
     setSyncing(true);
     // Simulate sync delay
     await new Promise((r) => setTimeout(r, 1500));

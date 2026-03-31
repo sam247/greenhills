@@ -2,7 +2,9 @@
 
 ## Environment variables
 
-Set these in the Vercel project (**Settings → Environment Variables**), for Production and Preview as needed:
+Set these in the Vercel project (**Settings → Environment Variables**), for **Production** and **Preview** (and optionally **Development**). The site **requires** these at **runtime** in the browser for auth and data; without them, login and portal features will not work.
+
+The production build completes even if variables are missing (the app skips creating a Supabase client until the browser has a configured URL and key), but you should always configure them before going live.
 
 | Variable | Description |
 |----------|-------------|

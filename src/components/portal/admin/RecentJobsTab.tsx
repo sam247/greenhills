@@ -37,6 +37,10 @@ const RecentJobsTab = () => {
   const [description, setDescription] = useState("");
 
   const fetchJobs = async () => {
+    if (!supabase) {
+      setLoading(false);
+      return;
+    }
     const { data, error } = await supabase
       .from("job_uploads")
       .select("*")
@@ -46,7 +50,9 @@ const RecentJobsTab = () => {
     setLoading(false);
   };
 
-  useEffect(() => { fetchJobs(); }, []);
+  useEffect(() => {
+    fetchJobs();
+  }, [supabase]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
@@ -72,6 +78,7 @@ const RecentJobsTab = () => {
   const handleSubmit = async () => {
     if (!service) { toast.error("Please select a service"); return; }
     if (files.length === 0) { toast.error("Please add at least one image"); return; }
+    if (!supabase) return;
 
     setUploading(true);
     try {
@@ -123,6 +130,7 @@ const RecentJobsTab = () => {
   };
 
   const deleteJob = async (job: JobUpload) => {
+    if (!supabase) return;
     // Delete images from storage
     for (const url of job.image_urls) {
       const path = url.split("/job-images/")[1];

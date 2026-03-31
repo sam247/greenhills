@@ -96,6 +96,10 @@ const AdminDashboard = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const fetchData = async () => {
+    if (!supabase) {
+      setLoading(false);
+      return;
+    }
     const [projectsRes, customersRes, invoicesRes, messagesRes] = await Promise.all([
       supabase.from("projects").select("*").order("created_at", { ascending: false }),
       supabase.from("profiles").select("*"),
@@ -109,9 +113,12 @@ const AdminDashboard = () => {
     setLoading(false);
   };
 
-  useEffect(() => { fetchData(); }, []);
+  useEffect(() => {
+    fetchData();
+  }, [supabase]);
 
   const handleCreateProject = async () => {
+    if (!supabase) return;
     const { error } = await supabase.from("projects").insert({
       title: newProject.title,
       description: newProject.description || null,
@@ -130,6 +137,7 @@ const AdminDashboard = () => {
   };
 
   const moveProject = async (projectId: string, newStatus: ProjectStatus) => {
+    if (!supabase) return;
     const { error } = await supabase.from("projects").update({ status: newStatus }).eq("id", projectId);
     if (error) {
       toast.error(error.message);

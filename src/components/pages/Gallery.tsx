@@ -36,6 +36,10 @@ const Gallery = () => {
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
 
   useEffect(() => {
+    if (!supabase) {
+      setLoading(false);
+      return;
+    }
     const fetchJobs = async () => {
       const { data } = await supabase
         .from("job_uploads")
@@ -45,7 +49,7 @@ const Gallery = () => {
       setLoading(false);
     };
     fetchJobs();
-  }, []);
+  }, [supabase]);
 
   // Flatten jobs into individual image cards
   const allCards = jobs.flatMap(job =>
