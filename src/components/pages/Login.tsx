@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
@@ -36,9 +37,8 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-muted px-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <div className="flex flex-col items-center mb-2">
-            <span className="font-heading text-xl font-extrabold tracking-tight text-foreground">GREENHILLS</span>
-            <span className="font-heading text-xs font-semibold tracking-[0.25em] text-muted-foreground">ELECTRIC</span>
+          <div className="flex justify-center mb-2">
+            <Image src="/logo.png" alt="Greenhills Electric" width={128} height={32} className="h-8 w-auto" style={{ filter: "brightness(0)" }} />
           </div>
           <CardTitle className="text-2xl font-heading">Portal Login</CardTitle>
           <CardDescription>Sign in to access your project dashboard</CardDescription>
