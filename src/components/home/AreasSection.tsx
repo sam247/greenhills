@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
 
@@ -12,19 +13,19 @@ const fadeUp = {
   }),
 };
 
-const towns = [
-  "Watford",
-  "St Albans",
-  "Hemel Hempstead",
-  "Stevenage",
-  "Hitchin",
-  "Berkhamsted",
-  "Harpenden",
-  "Welwyn Garden City",
-  "Hatfield",
-  "Rickmansworth",
-  "Bushey",
-  "Borehamwood",
+const towns: { name: string; slug?: string }[] = [
+  { name: "Watford" },
+  { name: "St Albans" },
+  { name: "Hemel Hempstead", slug: "hemel-hempstead" },
+  { name: "Stevenage" },
+  { name: "Hitchin" },
+  { name: "Berkhamsted" },
+  { name: "Harpenden" },
+  { name: "Welwyn Garden City" },
+  { name: "Hatfield" },
+  { name: "Rickmansworth" },
+  { name: "Bushey" },
+  { name: "Borehamwood" },
 ];
 
 const AreasSection = () => (
@@ -53,17 +54,30 @@ const AreasSection = () => (
         viewport={{ once: true, margin: "-50px" }}
         className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4 max-w-3xl mx-auto"
       >
-        {towns.map((town, i) => (
-          <motion.div
-            key={town}
-            variants={fadeUp}
-            custom={i + 3}
-            className="flex items-center gap-2 px-4 py-3 rounded-lg bg-background border border-border"
-          >
-            <MapPin className="h-4 w-4 text-primary shrink-0" />
-            <span className="text-sm font-heading font-600">{town}</span>
-          </motion.div>
-        ))}
+        {towns.map((town, i) => {
+          const pillClass =
+            "flex items-center gap-2 px-4 py-3 rounded-lg bg-background border border-border text-left w-full transition-colors";
+          const inner = (
+            <>
+              <MapPin className="h-4 w-4 text-primary shrink-0" />
+              <span className="text-sm font-heading font-600">{town.name}</span>
+            </>
+          );
+          return (
+            <motion.div key={town.name} variants={fadeUp} custom={i + 3}>
+              {town.slug ? (
+                <Link
+                  href={`/locations/${town.slug}`}
+                  className={`${pillClass} hover:border-primary hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary`}
+                >
+                  {inner}
+                </Link>
+              ) : (
+                <div className={pillClass}>{inner}</div>
+              )}
+            </motion.div>
+          );
+        })}
       </motion.div>
     </div>
   </section>

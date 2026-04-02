@@ -16,6 +16,8 @@ This document describes how the site is structured, how the backend fits in, and
 | App routes | `src/app/` |
 | Shared UI | `src/components/` (e.g. `layout/`, `home/`, `pages/`, `portal/`, `seo/`) |
 | Data for SEO slugs | `src/data/servicePages.ts` |
+| Location landing pages | `src/data/locationPages.ts` → `/locations/[slug]` |
+| Canonical site URL (sitemap, metadata, JSON-LD) | `src/lib/seo-config.ts` (`SITE_URL`) |
 | Shorter service list (nav, filters) | `src/data/services.ts` |
 | Supabase clients & generated types | `src/lib/supabase/` |
 | Auth helpers / hooks | `src/hooks/useAuth.tsx`, `src/components/ProtectedRoute.tsx` |
@@ -24,7 +26,9 @@ This document describes how the site is structured, how the backend fits in, and
 
 - **Home and sections:** `src/components/pages/Index.tsx` composes hero, trust, services, reviews, CTA, etc.
 - **Static-ish pages:** `about`, `commercial`, `domestic`, `contact`, `gallery`, `testimonials`, `privacy`, etc. under `src/app/<route>/`.
-- **Metadata:** Root defaults live in `src/app/layout.tsx` (title template, description, Open Graph / Twitter using `https://greenhillselectric.co.uk` and `/logo.png` for share images).
+- **Metadata:** Root defaults live in `src/app/layout.tsx` (title template, description, Open Graph / Twitter using `SITE_URL` and `/logo.png`). The homepage sets `metadata` in `src/app/page.tsx` with an **absolute** title so it can target Hertfordshire / Hemel Hempstead electrician queries without duplicating the template suffix.
+- **Sitemap:** `src/app/sitemap.ts` — generated at **`/sitemap.xml`**. It includes static routes, every `servicePages` and `industries` URL, and every `locationPages` URL. Rebuild or redeploy to refresh URLs when data files change.
+- **Robots:** `src/app/robots.ts` — serves **`/robots.txt`** and points crawlers at `${SITE_URL}/sitemap.xml`.
 
 ## Backend (Supabase)
 
@@ -96,6 +100,19 @@ Two dynamic routes render the **same** component tree for a given slug:
 ### Optional: aligning with `services.ts`
 
 `src/data/services.ts` lists shorter entries used for nav and gallery category mapping. When adding a major new line of business, consider whether a matching entry belongs there too for consistent filters and links.
+
+## Location landing pages (local SEO)
+
+### Data
+
+- **`src/data/locationPages.ts`** — array of **`LocationPageData`** (slug, town, title, metaDescription, keywords, copy blocks, related links).
+- **`src/app/locations/[slug]/page.tsx`** — `generateStaticParams()` from `locationPages`; `generateMetadata()` sets canonical `${SITE_URL}/locations/{slug}`.
+- **`src/components/seo/LocationPageTemplate.tsx`** — page layout, optional JSON-LD (`Electrician` + `areaServed`), CTA.
+
+### Adding a town
+
+1. Append a new object to **`locationPages`** with a unique `slug` and copy tailored to that town (natural use of “Hertfordshire electricians”, “{town} electricians”, etc.).
+2. **Areas** section pills: in **`src/components/home/AreasSection.tsx`**, add `slug: "your-slug"` next to the town `name` so the pill links to `/locations/your-slug`.
 
 ## Conventions
 
