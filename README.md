@@ -1,7 +1,7 @@
 # Greenhills Electric (Next.js)
 
-Next.js App Router port of the Greenhills electrician site with customer/admin portal backed by Supabase.
+Marketing site and customer/admin portal for Greenhills Electric, built with Next.js App Router and Supabase.
 
-- **Reference Vite app:** [`LOVABLE/`](LOVABLE/) (Lovable export)
-- **Run locally:** copy `.env.local.example` to `.env.local`, then `npm install` and `npm run dev`
-- **Deploy:** see [DEPLOYMENT.md](DEPLOYMENT.md)
+- **Agent / contributor guide:** [AGENTS.md](AGENTS.md) — architecture, backend, and how to add SEO pages.
+- **Run locally:** copy `.env.local.example` to `.env.local`, then `npm install` and `npm run dev`.
+- **Deploy:** see [DEPLOYMENT.md](DEPLOYMENT.md).

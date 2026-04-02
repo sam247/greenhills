@@ -21,9 +21,9 @@ export const metadata: Metadata = {
       "NICEIC approved electrical contractors with 60+ years experience. Commercial and domestic electrical services across London. Get a free quote today.",
     images: [
       {
-        url: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/18334d74-a5f5-41cd-8dc7-a45dac996272/id-preview-508ca78b--870fd8ba-2626-47fc-83e5-7ec5e0d538b7.lovable.app-1773413640257.png",
-        width: 1200,
-        height: 630,
+        url: `${siteUrl}/logo.png`,
+        width: 512,
+        height: 128,
         alt: "Greenhills Electric",
       },
     ],
@@ -33,9 +33,7 @@ export const metadata: Metadata = {
     title: "Greenhills Electric | Professional Electrical Contractors London",
     description:
       "NICEIC approved electrical contractors with 60+ years experience. Commercial and domestic electrical services across London. Get a free quote today.",
-    images: [
-      "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/18334d74-a5f5-41cd-8dc7-a45dac996272/id-preview-508ca78b--870fd8ba-2626-47fc-83e5-7ec5e0d538b7.lovable.app-1773413640257.png",
-    ],
+    images: [`${siteUrl}/logo.png`],
   },
 };
 

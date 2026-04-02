@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Star, ExternalLink } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -20,14 +21,7 @@ const googleReviews = [
   { name: "Linda P.", text: "Had an EV charger installed. Quick, tidy and explained everything clearly. Highly recommend.", rating: 5 },
 ];
 
-const trustpilotReviews = [
-  { name: "Mark D.", text: "Used Greenhills for our landlord EICR certificate. Fast, professional and great value. Will use again.", rating: 5 },
-  { name: "Emma W.", text: "They fitted a new consumer unit and smoke alarms. Very neat work, fully certified. Excellent service.", rating: 5 },
-  { name: "Paul R.", text: "Commercial fire alarm installation done on time and on budget. Highly competent team throughout.", rating: 5 },
-];
-
 interface ReviewBlockProps {
-  title: string;
   score: string;
   count: string;
   linkText: string;
@@ -35,9 +29,10 @@ interface ReviewBlockProps {
   reviews: typeof googleReviews;
   source: string;
   accentClass: string;
+  brandImage: { src: string; alt: string; width: number; height: number };
 }
 
-const ReviewBlock = ({ title, score, count, linkText, linkHref, reviews, source, accentClass }: ReviewBlockProps) => (
+const ReviewBlock = ({ score, count, linkText, linkHref, reviews, source, accentClass, brandImage }: ReviewBlockProps) => (
   <div>
     <motion.div
       initial="hidden"
@@ -47,13 +42,16 @@ const ReviewBlock = ({ title, score, count, linkText, linkHref, reviews, source,
       custom={0}
       className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5 md:mb-6 max-w-5xl mx-auto"
     >
-      <div className="flex items-center gap-3">
-        <div className={`w-9 h-9 md:w-10 md:h-10 rounded-lg ${accentClass} flex items-center justify-center`}>
-          <Star className="h-4 w-4 md:h-5 md:w-5" />
-        </div>
+      <div className="flex items-center gap-3 md:gap-4">
+        <Image
+          src={brandImage.src}
+          alt={brandImage.alt}
+          width={brandImage.width}
+          height={brandImage.height}
+          className="h-8 md:h-11 w-auto object-contain object-left shrink-0"
+        />
         <div>
-          <h3 className="font-heading font-700 text-base md:text-lg">{title}</h3>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 flex-wrap">
             <span className="text-xs md:text-sm font-heading font-600 text-foreground">{score}</span>
             <div className="flex gap-0.5">
               {Array.from({ length: 5 }).map((_, i) => (
@@ -118,33 +116,20 @@ const ReviewsSection = () => (
         <motion.p variants={fadeUp} custom={0} className="text-xs md:text-sm font-heading font-600 uppercase tracking-wider text-primary mb-2 md:mb-3">Reviews</motion.p>
         <motion.h2 variants={fadeUp} custom={1} className="text-2xl md:text-4xl font-heading font-800 mb-3 md:mb-4">Trusted by Homeowners & Businesses</motion.h2>
         <motion.p variants={fadeUp} custom={2} className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
-          Don't just take our word for it. See what our customers say on Google and Trustpilot.
+          Don't just take our word for it. See what our customers say on Google.
         </motion.p>
       </motion.div>
 
-      <div className="space-y-12 md:space-y-16">
-        <ReviewBlock
-          title="Google Reviews"
-          score="5.0"
-          count="48"
-          linkText="Leave a Review"
-          linkHref="https://g.page/r/greenhills-electric/review"
-          reviews={googleReviews}
-          source="Google Review"
-          accentClass="bg-primary/10 text-primary"
-        />
-
-        <ReviewBlock
-          title="Trustpilot"
-          score="4.9"
-          count="34"
-          linkText="View on Trustpilot"
-          linkHref="https://www.trustpilot.com/review/greenhillselectric.co.uk"
-          reviews={trustpilotReviews}
-          source="Trustpilot Review"
-          accentClass="bg-[hsl(156,100%,35%)]/10 text-[hsl(156,100%,35%)]"
-        />
-      </div>
+      <ReviewBlock
+        score="5.0"
+        count="48"
+        linkText="Leave a Review"
+        linkHref="https://g.page/r/greenhills-electric/review"
+        reviews={googleReviews}
+        source="Google Review"
+        accentClass="bg-primary/10 text-primary"
+        brandImage={{ src: "/google.png", alt: "Google Reviews", width: 300, height: 150 }}
+      />
     </div>
   </section>
 );

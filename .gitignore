@@ -36,6 +36,3 @@ yarn-error.log*
 
 # vercel
 .vercel
-
-# local Lovable reference copy (not part of Next deploy)
-/LOVABLE/
