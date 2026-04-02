@@ -109,6 +109,15 @@ Two dynamic routes render the **same** component tree for a given slug:
 - **`src/app/locations/[slug]/page.tsx`** — `generateStaticParams()` from `locationPages`; `generateMetadata()` sets canonical `${SITE_URL}/locations/{slug}`.
 - **`src/components/seo/LocationPageTemplate.tsx`** — page layout, optional JSON-LD (`Electrician` + `areaServed`), CTA.
 
+### Full-width page pattern (marketing pages)
+
+Location pages follow the same layout convention as **`ServicePageTemplate`** and other marketing pages:
+
+- Each **section** is **full viewport width** (backgrounds and borders span edge to edge).
+- Inner content uses **`container`** only — **do not** wrap the whole page in `max-w-3xl` or similar; that narrows the entire layout and breaks alignment with the rest of the site.
+- Use **`max-w-2xl`** (or similar) only on **individual** blocks where line length should be capped (e.g. hero intro line), not on the outer `container`.
+- Alternate **section backgrounds** (`bg-muted/30`, `bg-primary/5`, borders) and use **grids** (`sm:grid-cols-2`, `md:grid-cols-3`) for lists and related links so content uses the full content width on large screens.
+
 ### Adding a town
 
 1. Append a new object to **`locationPages`** with a unique `slug` and copy tailored to that town (natural use of “Hertfordshire electricians”, “{town} electricians”, etc.).
@@ -116,6 +125,7 @@ Two dynamic routes render the **same** component tree for a given slug:
 
 ## Conventions
 
-- Prefer **existing patterns** (Layout wrapper, `ServicePageTemplate`, shadcn components) over one-off duplicates.
+- Prefer **existing patterns** (Layout wrapper, `ServicePageTemplate`, `LocationPageTemplate`, shadcn components) over one-off duplicates.
+- **Marketing pages:** full-width sections + `container` inner; see *Full-width page pattern* under location pages above.
 - **Images** for the static site live under `public/` and are referenced with root paths (e.g. `/logo.png`).
 - After DB schema changes, update **`database.types.ts`** and any affected queries.
