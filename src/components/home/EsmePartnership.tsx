@@ -11,14 +11,14 @@ const EsmePartnership = () => (
           rel="noopener noreferrer"
           className="text-primary font-heading font-600 hover:underline"
         >
-          esme.energy
+          Esme Energy
         </a>
       </p>
       <p className="text-xs md:text-sm text-muted-foreground/80 mb-6">Home battery company</p>
       <div className="flex justify-center">
         <Image
           src="/esme.png"
-          alt="esme.energy — home battery company"
+          alt="Esme Energy — home battery company"
           width={240}
           height={96}
           className="h-auto w-auto max-w-[200px] md:max-w-[260px] object-contain"
