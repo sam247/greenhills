@@ -13,10 +13,10 @@ const Index = () => {
   return (
     <Layout>
       <HeroSection />
-      <EsmePartnership />
       <TrustBadges />
       <ServicesSection />
       <ProjectsShowcase />
+      <EsmePartnership />
       <WhyChooseUs />
       <AreasSection />
       <ReviewsSection />
