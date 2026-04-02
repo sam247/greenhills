@@ -23,12 +23,18 @@ const Header = () => {
     <header className="sticky top-0 z-50 bg-background shadow-sm">
       {/* Top bar */}
       <div className="border-b border-border bg-muted">
-        <div className="container flex items-center justify-between py-1.5 md:py-2 text-xs md:text-sm">
-          <a href="tel:01442264125" className="flex items-center gap-1.5 md:gap-2 font-medium text-foreground hover:text-primary transition-colors">
-            <Phone className="h-3.5 w-3.5 md:h-4 md:w-4" />
-            <span className="hidden xs:inline">Call us today</span> <span>01442 264125</span>
+        <div className="container flex items-center justify-between gap-3 py-1.5 md:py-2 text-xs md:text-sm min-w-0">
+          <a
+            href="tel:01442264125"
+            className="flex items-center gap-1.5 md:gap-2 font-medium text-foreground hover:text-primary transition-colors shrink-0"
+          >
+            <Phone className="h-3.5 w-3.5 md:h-4 md:w-4 shrink-0" />
+            <span className="whitespace-nowrap">
+              <span className="hidden xs:inline">Call us today </span>
+              01442 264125
+            </span>
           </a>
-          <span className="text-[10px] md:text-xs text-muted-foreground">NICEIC Approved • Part P Registered • 60+ Years Experience</span>
+          <span className="text-[10px] md:text-xs text-muted-foreground text-right shrink-0">NICEIC Approved</span>
         </div>
       </div>
 
